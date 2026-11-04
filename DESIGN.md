@@ -1,7 +1,7 @@
 # DESIGN.md: the Murmur style guide site
 
 ## Purpose
-Show the Murmur design language as something you can read, hear and touch, and audit the owner's live pages against it.
+Show the Murmur design language as something you can read, hear and touch.
 
 ## Theme and why
 Neutral base theme (`custom` in the skill registry: calm green accent, soft sound palette, iris transition, motes). A style guide should not compete with the twelve themes it shows, so its own look is the plain base, and the themes appear scoped inside the gallery.
@@ -25,7 +25,7 @@ Skip link, landmarks, one h1, roving tabindex in radiogroups and tabs, native di
 - The prose is written once (DESIGN-LANGUAGE.md) and the page is assembled from it, at the cost of an authoring-time Python build. Rejected: hand-maintaining two copies.
 - Tables and tokens are generated from the skill registry so they cannot drift.
 - Demos use scoped CSS variables instead of re-theming the whole page, so reading continues while you try a theme.
-- The conformance audit is a set of heuristics that compare committed files with the working tree; it is a prompt to look, not a verdict. One result (BIOT 6900's Sound button) needed a manual override because that button is injected by script.
+- The conformance audit (kept in docs/conformance.json, not shown on the page) is a set of heuristics that compare committed files with the working tree; it is a prompt to look, not a verdict. One result (BIOT 6900's Sound button) needed a manual override because that button is injected by script.
 - Kit fix found while building: parallax offsets are clamped to 24px (the old formula moved a hero heading by tens of pixels in tall windows).
 
 ## How to extend
