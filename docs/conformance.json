@@ -1,0 +1,421 @@
+{
+  "date": "2026-11-04",
+  "checks": [
+    {
+      "id": "sound",
+      "label": "Sound symbol control"
+    },
+    {
+      "id": "motion",
+      "label": "Motion symbol control"
+    },
+    {
+      "id": "effects",
+      "label": "Effects symbol control"
+    },
+    {
+      "id": "quiet",
+      "label": "Quiet-everything control"
+    },
+    {
+      "id": "soundOn",
+      "label": "Sound on by default"
+    },
+    {
+      "id": "themeKey",
+      "label": "Shared theme key"
+    },
+    {
+      "id": "themeThree",
+      "label": "Light/Dark/Auto selector"
+    },
+    {
+      "id": "themeEarly",
+      "label": "Early theme script in head"
+    },
+    {
+      "id": "reduced",
+      "label": "Reduced-motion gate"
+    },
+    {
+      "id": "fallback",
+      "label": "Text or no-JS fallback"
+    },
+    {
+      "id": "readme",
+      "label": "README.md"
+    },
+    {
+      "id": "design",
+      "label": "DESIGN.md"
+    },
+    {
+      "id": "tests",
+      "label": "Tests"
+    },
+    {
+      "id": "noExternal",
+      "label": "No external requests"
+    }
+  ],
+  "pages": [
+    {
+      "slug": "himawari-io",
+      "name": "Himawari",
+      "url": "https://dhairyab0069.github.io/himawari-io/",
+      "status": {
+        "sound": "yes",
+        "motion": "no",
+        "effects": "no",
+        "quiet": "no",
+        "soundOn": "no",
+        "themeKey": "yes",
+        "themeThree": "yes",
+        "themeEarly": "yes",
+        "reduced": "yes",
+        "fallback": "yes",
+        "readme": "yes",
+        "design": "no",
+        "tests": "no",
+        "noExternal": "no"
+      },
+      "uncommitted": 0,
+      "lastCommit": {
+        "hash": "86941a3",
+        "date": "2026-11-04",
+        "subject": "Light, dark and auto theme shared across the site (theme key, three-way switch)"
+      },
+      "fallbackKind": "static content",
+      "inProgress": false,
+      "manual": {},
+      "score": 7,
+      "total": 14
+    },
+    {
+      "slug": "calendar-app-io",
+      "name": "Calendar",
+      "url": "https://dhairyab0069.github.io/calendar-app-io/",
+      "status": {
+        "sound": "yes",
+        "motion": "yes",
+        "effects": "no",
+        "quiet": "no",
+        "soundOn": "no",
+        "themeKey": "yes",
+        "themeThree": "yes",
+        "themeEarly": "yes",
+        "reduced": "yes",
+        "fallback": "yes",
+        "readme": "yes",
+        "design": "no",
+        "tests": "yes",
+        "noExternal": "yes"
+      },
+      "uncommitted": 0,
+      "lastCommit": {
+        "hash": "6ea421d",
+        "date": "2026-11-04",
+        "subject": "Light, dark and auto theme shared across the site (theme key, three-way switch)"
+      },
+      "fallbackKind": "noscript",
+      "inProgress": false,
+      "manual": {
+        "themeNote": "retro desktop with stepped motion by design (steps, no easing curves)"
+      },
+      "score": 10,
+      "total": 14
+    },
+    {
+      "slug": "abiogenesis-io",
+      "name": "Abiogenesis",
+      "url": "https://dhairyab0069.github.io/abiogenesis-io/",
+      "status": {
+        "sound": "yes",
+        "motion": "yes",
+        "effects": "no",
+        "quiet": "no",
+        "soundOn": "no",
+        "themeKey": "yes",
+        "themeThree": "yes",
+        "themeEarly": "yes",
+        "reduced": "yes",
+        "fallback": "yes",
+        "readme": "yes",
+        "design": "no",
+        "tests": "yes",
+        "noExternal": "yes"
+      },
+      "uncommitted": 0,
+      "lastCommit": {
+        "hash": "b87017c",
+        "date": "2026-11-04",
+        "subject": "Light, dark and auto: shared theme setting, a sunlit tide pool light mode, three-way switc"
+      },
+      "fallbackKind": "noscript",
+      "inProgress": false,
+      "manual": {},
+      "score": 10,
+      "total": 14
+    },
+    {
+      "slug": "biot6900-io",
+      "name": "BIOT 6900",
+      "url": "https://dhairyab0069.github.io/biot6900-io/",
+      "status": {
+        "sound": "yes",
+        "motion": "no",
+        "effects": "no",
+        "quiet": "no",
+        "soundOn": "no",
+        "themeKey": "yes",
+        "themeThree": "yes",
+        "themeEarly": "yes",
+        "reduced": "yes",
+        "fallback": "yes",
+        "readme": "yes",
+        "design": "no",
+        "tests": "yes",
+        "noExternal": "no"
+      },
+      "uncommitted": 0,
+      "lastCommit": {
+        "hash": "1cd5eb4",
+        "date": "2026-11-04",
+        "subject": "Shared light, dark and auto theme (localStorage theme, icon radio switch, live across tabs"
+      },
+      "fallbackKind": "static content",
+      "inProgress": false,
+      "manual": {
+        "themeNote": "the Sound button is injected by sound.js (so the markup search misses it) and is off until pressed; the page loads Literata from Google Fonts and 3Dmol from cdnjs"
+      },
+      "score": 8,
+      "total": 14
+    },
+    {
+      "slug": "garage-io",
+      "name": "The Garage",
+      "url": "https://dhairyab0069.github.io/garage-io/",
+      "status": {
+        "sound": "yes",
+        "motion": "no",
+        "effects": "no",
+        "quiet": "no",
+        "soundOn": "no",
+        "themeKey": "yes",
+        "themeThree": "yes",
+        "themeEarly": "yes",
+        "reduced": "yes",
+        "fallback": "yes",
+        "readme": "yes",
+        "design": "no",
+        "tests": "yes",
+        "noExternal": "yes"
+      },
+      "uncommitted": 0,
+      "lastCommit": {
+        "hash": "5cbac11",
+        "date": "2026-11-04",
+        "subject": "Garage: slightly lighter muted text on the locked toolboxes for contrast"
+      },
+      "fallbackKind": "noscript",
+      "inProgress": false,
+      "manual": {},
+      "score": 9,
+      "total": 14
+    },
+    {
+      "slug": "focuslock-io",
+      "name": "FocusLock",
+      "url": "https://dhairyab0069.github.io/focuslock-io/",
+      "status": {
+        "sound": "yes",
+        "motion": "yes",
+        "effects": "yes",
+        "quiet": "yes",
+        "soundOn": "yes",
+        "themeKey": "yes",
+        "themeThree": "yes",
+        "themeEarly": "yes",
+        "reduced": "yes",
+        "fallback": "yes",
+        "readme": "yes",
+        "design": "no",
+        "tests": "yes",
+        "noExternal": "yes"
+      },
+      "uncommitted": 0,
+      "lastCommit": {
+        "hash": "31fc1cd",
+        "date": "2026-11-04",
+        "subject": "Effects is a sparkle and Quiet is a circle with a bar, so neither looks like the sun, moon"
+      },
+      "fallbackKind": "noscript",
+      "inProgress": false,
+      "manual": {},
+      "score": 13,
+      "total": 14
+    },
+    {
+      "slug": "atlas-mobile-io",
+      "name": "Atlas Mobile",
+      "url": "https://dhairyab0069.github.io/atlas-mobile-io/",
+      "status": {
+        "sound": "yes",
+        "motion": "no",
+        "effects": "no",
+        "quiet": "no",
+        "soundOn": "no",
+        "themeKey": "yes",
+        "themeThree": "yes",
+        "themeEarly": "yes",
+        "reduced": "yes",
+        "fallback": "yes",
+        "readme": "yes",
+        "design": "no",
+        "tests": "yes",
+        "noExternal": "yes"
+      },
+      "uncommitted": 0,
+      "lastCommit": {
+        "hash": "bb62036",
+        "date": "2026-11-04",
+        "subject": "Light, dark and auto: shared theme setting, a clean white gym light mode, three-way switch"
+      },
+      "fallbackKind": "static content",
+      "inProgress": false,
+      "manual": {},
+      "score": 9,
+      "total": 14
+    },
+    {
+      "slug": "lucascheck-io",
+      "name": "LucasCheck",
+      "url": "https://dhairyab0069.github.io/lucascheck-io/",
+      "status": {
+        "sound": "yes",
+        "motion": "no",
+        "effects": "no",
+        "quiet": "no",
+        "soundOn": "no",
+        "themeKey": "yes",
+        "themeThree": "yes",
+        "themeEarly": "yes",
+        "reduced": "yes",
+        "fallback": "yes",
+        "readme": "yes",
+        "design": "no",
+        "tests": "yes",
+        "noExternal": "yes"
+      },
+      "uncommitted": 0,
+      "lastCommit": {
+        "hash": "5413bfe",
+        "date": "2026-11-04",
+        "subject": "Light, dark and auto theme shared across the site (theme key, three-way switch)"
+      },
+      "fallbackKind": "static content",
+      "inProgress": false,
+      "manual": {},
+      "score": 9,
+      "total": 14
+    },
+    {
+      "slug": "ml-projects-io",
+      "name": "ML projects town",
+      "url": "https://dhairyab0069.github.io/ml-projects-io/",
+      "status": {
+        "sound": "yes",
+        "motion": "yes",
+        "effects": "yes",
+        "quiet": "no",
+        "soundOn": "no",
+        "themeKey": "no",
+        "themeThree": "no",
+        "themeEarly": "no",
+        "reduced": "yes",
+        "fallback": "yes",
+        "readme": "yes",
+        "design": "no",
+        "tests": "yes",
+        "noExternal": "yes"
+      },
+      "uncommitted": 0,
+      "lastCommit": {
+        "hash": "06c0cd2",
+        "date": "2026-11-04",
+        "subject": "Add a portal in the manifold-search yard that opens the project page"
+      },
+      "fallbackKind": "text version",
+      "inProgress": false,
+      "manual": {
+        "themeNote": "its theme is a single cycle button with its own key (mlp-theme), not the shared theme key"
+      },
+      "score": 8,
+      "total": 14
+    },
+    {
+      "slug": "macos-tools-io",
+      "name": "macOS tools",
+      "url": "https://dhairyab0069.github.io/macos-tools-io/",
+      "status": {
+        "sound": "yes",
+        "motion": "yes",
+        "effects": "yes",
+        "quiet": "yes",
+        "soundOn": "yes",
+        "themeKey": "yes",
+        "themeThree": "yes",
+        "themeEarly": "yes",
+        "reduced": "yes",
+        "fallback": "yes",
+        "readme": "yes",
+        "design": "no",
+        "tests": "yes",
+        "noExternal": "yes"
+      },
+      "uncommitted": 0,
+      "lastCommit": {
+        "hash": "685c1ba",
+        "date": "2026-11-04",
+        "subject": "Effects is a sparkle and Quiet is a circle with a bar, so neither looks like the sun, moon"
+      },
+      "fallbackKind": "static content",
+      "inProgress": false,
+      "manual": {},
+      "score": 13,
+      "total": 14
+    },
+    {
+      "slug": "manifold-io",
+      "name": "Manifold",
+      "url": "https://dhairyab0069.github.io/manifold-io/",
+      "status": {
+        "sound": "yes",
+        "motion": "yes",
+        "effects": "yes",
+        "quiet": "yes",
+        "soundOn": "yes",
+        "themeKey": "no",
+        "themeThree": "no",
+        "themeEarly": "no",
+        "reduced": "yes",
+        "fallback": "yes",
+        "readme": "yes",
+        "design": "no",
+        "tests": "yes",
+        "noExternal": "yes"
+      },
+      "uncommitted": 0,
+      "lastCommit": {
+        "hash": "855273d",
+        "date": "2026-11-04",
+        "subject": "Effects is a sparkle and Quiet is a circle with a bar, so neither looks like the sun, moon"
+      },
+      "fallbackKind": "noscript",
+      "inProgress": false,
+      "manual": {},
+      "score": 10,
+      "total": 14
+    }
+  ]
+}
