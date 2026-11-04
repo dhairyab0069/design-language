@@ -118,7 +118,7 @@ Every theme defines a full light set and a full dark set of the thirteen colour 
 <!--id:type-->
 System fonts only: no web fonts, no font files. A theme may choose a different system stack (Impact for the workshop, Iowan Old Style or Georgia for the paper report, a monospace for the retro desktop) but never downloads one.
 
-*Observed:* the pages use `ui-rounded, "SF Pro Rounded", system-ui` for friendly pages, an Impact stencil for the garage, serif for the report, and `ui-monospace` for code on all of them. Some pages still load web fonts or scripts from other origins; the conformance table in part 10 says which.
+*Observed:* the pages use `ui-rounded, "SF Pro Rounded", system-ui` for friendly pages, an Impact stencil for the garage, serif for the report, and `ui-monospace` for code on all of them.
 
 <!--GEN:scale-fonts-->
 | Token | Value | Use |
