@@ -1,0 +1,97 @@
+/* Design tokens: the only place raw colours, sizes, durations and layers are defined.
+   Components read roles (--bg, --accent, --dur-base), never raw values.
+   new_site.py rewrites the colour and font lines from registry/themes/<theme>.json. */
+:root {
+  /* colour roles: see the THEME-COLORS block below (a light set and a dark set, each designed, never a plain inversion) */
+  --accent-text: var(--accent);
+  /* type */
+  --font-display: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --weight-display: 750; --track-display: -.01em;
+  --step--1: clamp(.82rem, .8rem + .1vw, .9rem);
+  --step-0: clamp(1rem, .95rem + .25vw, 1.12rem);
+  --step-1: clamp(1.25rem, 1.1rem + .6vw, 1.6rem);
+  --step-2: clamp(1.6rem, 1.3rem + 1.2vw, 2.3rem);
+  --step-3: clamp(2.1rem, 1.5rem + 2.4vw, 3.4rem);
+  --step-4: clamp(2.8rem, 1.6rem + 4.6vw, 5.2rem);
+  --leading: 1.6; --leading-tight: 1.1; --measure: 66ch;
+  /* spacing (4px base, 1.5x steps) */
+  --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem; --space-5: 1.5rem;
+  --space-6: 2.25rem; --space-7: 3.5rem; --space-8: 5.5rem; --gutter: clamp(1rem, 4vw, 2rem); --wrap: 72rem;
+  /* shape and elevation */
+  --radius-s: 6px; --radius-m: 14px; --radius-l: 24px; --radius-pill: 999px; --border: 1px solid var(--line);
+  --shadow-1: 0 1px 2px rgba(0,0,0,.08), 0 1px 1px rgba(0,0,0,.05);
+  --shadow-2: 0 6px 18px rgba(0,0,0,.12);
+  --shadow-3: 0 18px 48px rgba(0,0,0,.2);
+  /* motion: durations and easings. Nothing animates longer than --dur-scene. */
+  --dur-instant: 80ms; --dur-fast: 160ms; --dur-base: 280ms; --dur-slow: 520ms; --dur-scene: 900ms;
+  --ease-standard: cubic-bezier(.2, .7, .2, 1);
+  --ease-in: cubic-bezier(.5, 0, .9, .4);
+  --ease-out: cubic-bezier(.1, .7, .2, 1);
+  --ease-spring: cubic-bezier(.34, 1.4, .64, 1);
+  --reveal-distance: 22px; --reveal-stagger: 70ms;
+  /* layers */
+  --z-base: 0; --z-field: 0; --z-content: 1; --z-nav: 50; --z-controls: 60; --z-modal: 100; --z-toast: 120; --z-tx: 200;
+}
+/*THEME-COLORS:START*/
+:root, :root[data-theme="light"] {
+  color-scheme: light;
+  --ok: #2f7d4f;
+  --warn: #8a5a00;
+  --danger: #a8362c;
+  --bg: #f6f4ee;
+  --surface: #ffffff;
+  --surface-2: #ece9df;
+  --ink: #1d2328;
+  --muted: #55606a;
+  --line: #d6d2c4;
+  --accent: #2f6f5e;
+  --accent-ink: #ffffff;
+  --accent-soft: #dcebe5;
+  --accent-2: #b5731f;
+  --focus: #1d5fc4;
+  --overlay: #1d2328;
+  --glow-rgb: 255, 214, 130;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme]) {
+  color-scheme: dark;
+  --ok: #6fd39a;
+  --warn: #f0c060;
+  --danger: #ff8a7d;
+  --bg: #14181b;
+  --surface: #1c2226;
+  --surface-2: #242c31;
+  --ink: #e8ecef;
+  --muted: #a4aeb6;
+  --line: #34414a;
+  --accent: #6fc3a8;
+  --accent-ink: #0f1a16;
+  --accent-soft: #1f3a32;
+  --accent-2: #e0a85a;
+  --focus: #7aa8ff;
+  --overlay: #0b0f11;
+  --glow-rgb: 255, 214, 130;
+}
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ok: #6fd39a;
+  --warn: #f0c060;
+  --danger: #ff8a7d;
+  --bg: #14181b;
+  --surface: #1c2226;
+  --surface-2: #242c31;
+  --ink: #e8ecef;
+  --muted: #a4aeb6;
+  --line: #34414a;
+  --accent: #6fc3a8;
+  --accent-ink: #0f1a16;
+  --accent-soft: #1f3a32;
+  --accent-2: #e0a85a;
+  --focus: #7aa8ff;
+  --overlay: #0b0f11;
+  --glow-rgb: 255, 214, 130;
+}
+/*THEME-COLORS:END*/

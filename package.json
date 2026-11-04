@@ -1,0 +1,9 @@
+{
+  "name": "design-language",
+  "private": true,
+  "scripts": {
+    "test": "node tests/site.test.js && node tests/design-language.test.js",
+    "build": "python3 scripts/audit_conformance.py && python3 scripts/build.py && node scripts/build_text.js",
+    "text": "node scripts/build_text.js"
+  }
+}

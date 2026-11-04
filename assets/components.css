@@ -1,0 +1,60 @@
+/* Components: header/nav, hero, card grid, timeline, chart, tabs, modal/panel, toast, footer. Tokens only, no raw values.
+   Hover and press feedback use transform and opacity; nothing animates width, height, top or left. */
+.dw-header { position: sticky; top: 0; z-index: var(--z-nav); background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color var(--dur-base); }
+html[data-scrolled] .dw-header { border-bottom-color: var(--line); }
+.dw-header .wrap { display: flex; align-items: center; gap: var(--space-4); min-height: 3.75rem; }
+.dw-brand { font: var(--weight-display) var(--step-1)/1 var(--font-display); color: var(--ink); text-decoration: none; margin-right: auto; }
+.dw-nav { display: flex; gap: var(--space-1); flex-wrap: wrap; }
+.dw-nav a { color: var(--muted); text-decoration: none; padding: var(--space-2) var(--space-3); border-radius: var(--radius-pill); transition: color var(--dur-fast), background-color var(--dur-fast); }
+.dw-nav a:hover, .dw-nav a[aria-current="true"] { color: var(--ink); background: var(--accent-soft); }
+@media (max-width: 760px) { .dw-header .wrap { flex-wrap: wrap; padding-block: var(--space-2); } .dw-nav { order: 3; width: 100%; } }
+
+.dw-hero { min-height: min(82vh, 40rem); display: grid; align-content: center; position: relative; z-index: var(--z-content); padding-block: var(--space-8); }
+.dw-hero h1 { max-width: 16ch; }
+.dw-hero .lede { font-size: var(--step-1); color: var(--muted); max-width: 40ch; }
+.dw-hero [data-depth] { display: inline-block; }
+.dw-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-5); }
+.dw-btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-5); border-radius: var(--radius-pill); border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink); font: 650 var(--step-0)/1 var(--font-body); text-decoration: none; cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-standard), box-shadow var(--dur-base); }
+.dw-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
+.dw-btn:active { transform: scale(.97); }
+.dw-btn.ghost { background: transparent; color: var(--accent-text); }
+
+.dw-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin-top: var(--space-5); }
+.dw-card { background: var(--surface); border: var(--border); border-radius: var(--radius-m); padding: var(--space-5); box-shadow: var(--shadow-1); transition: transform var(--dur-base) var(--ease-standard), box-shadow var(--dur-base); }
+.dw-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-2); }
+.dw-card h3 { margin-bottom: var(--space-2); } .dw-card p:last-child { margin-bottom: 0; }
+.dw-tag { display: inline-block; font: 600 var(--step--1)/1 var(--font-mono); color: var(--accent-text); background: var(--accent-soft); padding: .3em .7em; border-radius: var(--radius-pill); margin-bottom: var(--space-3); }
+
+.dw-timeline { list-style: none; margin: var(--space-5) 0 0; padding: 0 0 0 var(--space-5); border-left: 2px solid var(--line); }
+.dw-timeline li { position: relative; padding-bottom: var(--space-5); }
+.dw-timeline li::before { content: ""; position: absolute; left: calc(-1 * var(--space-5) - 7px); top: .45em; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.dw-timeline time { font: 600 var(--step--1)/1 var(--font-mono); color: var(--muted); }
+
+.dw-chart { background: var(--surface); border: var(--border); border-radius: var(--radius-m); padding: var(--space-5); margin: var(--space-5) 0 0; }
+.dw-chart svg { width: 100%; height: auto; max-height: 18rem; display: block; }
+.dw-chart .bar { fill: var(--accent); transform-box: fill-box; transform-origin: 50% 100%; }
+html.fx .dw-chart:not(.is-in) .bar { transform: scaleY(0); }
+html.fx .dw-chart .bar { transition: transform var(--dur-slow) var(--ease-standard); transition-delay: calc(var(--i, 0) * 60ms); }
+.dw-chart text { fill: var(--muted); font: 12px var(--font-body); }
+.dw-chart details { margin-top: var(--space-3); } .dw-chart summary { cursor: pointer; color: var(--accent-text); min-height: 44px; display: flex; align-items: center; }
+.dw-chart table { border-collapse: collapse; width: 100%; font-size: var(--step--1); } .dw-chart th, .dw-chart td { text-align: left; padding: var(--space-2); border-bottom: 1px solid var(--line); }
+
+.dw-tabs [role="tablist"] { display: flex; gap: var(--space-1); flex-wrap: wrap; border-bottom: 1px solid var(--line); margin-top: var(--space-5); }
+.dw-tabs [role="tab"] { min-height: 44px; padding: 0 var(--space-4); background: none; border: 0; border-bottom: 3px solid transparent; color: var(--muted); font: 600 var(--step-0)/1 var(--font-body); cursor: pointer; transition: color var(--dur-fast), border-color var(--dur-base); }
+.dw-tabs [role="tab"][aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.dw-tabs [role="tabpanel"] { padding-top: var(--space-4); }
+html.fx .dw-tabs [role="tabpanel"]:not([hidden]) { animation: dw-rise var(--dur-base) var(--ease-standard); }
+@keyframes dw-rise { from { opacity: 0; transform: translate3d(0, 10px, 0); } to { opacity: 1; transform: none; } }
+
+dialog.dw-modal { border: var(--border); border-radius: var(--radius-l); padding: var(--space-6); max-width: min(34rem, 92vw); background: var(--surface); color: var(--ink); box-shadow: var(--shadow-3); z-index: var(--z-modal); }
+dialog.dw-modal::backdrop { background: rgba(0,0,0,.45); }
+html.fx dialog.dw-modal[open] { animation: dw-pop var(--dur-base) var(--ease-spring); }
+@keyframes dw-pop { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: none; } }
+
+.dw-toast { position: fixed; left: 50%; bottom: var(--space-5); z-index: var(--z-toast); transform: translate3d(-50%, 0, 0); background: var(--ink); color: var(--bg); padding: var(--space-3) var(--space-5); border-radius: var(--radius-pill); box-shadow: var(--shadow-3); max-width: 92vw; }
+html.fx .dw-toast { animation: dw-toast var(--dur-base) var(--ease-standard); }
+@keyframes dw-toast { from { opacity: 0; transform: translate3d(-50%, 16px, 0); } to { opacity: 1; transform: translate3d(-50%, 0, 0); } }
+
+.dw-footer { border-top: 1px solid var(--line); padding-block: var(--space-6); color: var(--muted); position: relative; z-index: var(--z-content); }
+.dw-footer a { color: var(--muted); }

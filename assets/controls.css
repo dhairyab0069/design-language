@@ -1,0 +1,29 @@
+/* The symbol controls: Sound, Motion, Effects and Quiet-everything. 44px targets, visible focus, state shown by fill and glyph, not colour alone. */
+.dw-controls { display: flex; gap: var(--space-2); align-items: center; flex-wrap: nowrap; }
+.dw-ico { display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-standard), background-color var(--dur-base), color var(--dur-base), box-shadow var(--dur-base), border-color var(--dur-base); }
+.dw-ico .i { width: 24px; height: 24px; }
+.dw-ico:hover { transform: translateY(-1px); border-color: var(--accent); }
+.dw-ico:active { transform: scale(.94); }
+.dw-ico:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.dw-ico[aria-pressed="true"] { color: var(--ink); background: color-mix(in srgb, var(--accent) 22%, transparent); border-color: var(--accent); box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 38%, transparent); }
+.dw-ico[aria-pressed="false"] { opacity: .75; }
+.dw-ico .off-only { display: none; }
+.dw-ico[aria-pressed="false"] .on-only { display: none; }
+.dw-ico[aria-pressed="false"] .off-only { display: inline; }
+#dw-quiet .on-only, #dw-quiet .off-only { display: inline; }
+@media (max-width: 640px) { .dw-ico { width: 44px; height: 44px; } .dw-controls { gap: var(--space-1); } }
+
+/* Theme: a three-way segmented radiogroup of icon-only radios (light, dark, auto). */
+.dw-theme-switch { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 2px; gap: 2px; }
+.dw-theme-switch [role="radio"] { width: 44px; height: 44px; display: inline-grid; place-items: center; padding: 0; border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--muted); cursor: pointer; transition: background-color var(--dur-base), color var(--dur-base), transform var(--dur-fast) var(--ease-standard); }
+.dw-theme-switch [role="radio"] svg { width: 22px; height: 22px; }
+.dw-theme-switch [role="radio"]:hover { color: var(--ink); }
+.dw-theme-switch [role="radio"]:active { transform: scale(.94); }
+.dw-theme-switch [role="radio"][aria-checked="true"] { background: var(--accent); color: var(--accent-ink); }
+.dw-theme-switch [role="radio"]:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+@media (max-width: 640px) { .dw-theme-switch [role="radio"] { width: 44px; } }
+html:not(.dw-ready) .dw-theme-switch [role="radio"] { transition: none; }
+/* Crossfade fallback and View Transition tuning */
+html.dw-theme-fade, html.dw-theme-fade *, html.dw-theme-fade *::before, html.dw-theme-fade *::after { transition: background-color .6s ease, color .6s ease, border-color .6s ease, fill .6s ease !important; }
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }

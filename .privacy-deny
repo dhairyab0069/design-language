@@ -1,0 +1,5 @@
+# One term per line (case-insensitive). check_site.js fails if any appears in the site.
+# Add names of private or under-review projects, employers, labs, supervisors.
+northeastern
+aclab
+egoexo

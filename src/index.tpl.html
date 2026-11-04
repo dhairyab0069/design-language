@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en" class="no-js" data-site-theme="custom" data-transition="iris" data-ambient="motes" data-reveal-style="rise">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Murmur design language</title>
+<meta name="description" content="Murmur: the design language behind Dhairya Bhatia&#x27;s project pages. Principles, tokens, motion, sound, controls, components, themes and a live conformance audit.">
+<meta name="theme-color" content="#f6f4ee">
+<link rel="canonical" href="https://dhairyab0069.github.io/design-language/">
+<link rel="icon" type="image/png" href="favicon-64.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Murmur design language">
+<meta property="og:description" content="Murmur: the design language behind Dhairya Bhatia&#x27;s project pages. Principles, tokens, motion, sound, controls, components, themes and a live conformance audit.">
+<meta property="og:url" content="https://dhairyab0069.github.io/design-language/">
+<meta property="og:image" content="https://dhairyab0069.github.io/design-language/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Murmur design language">
+<meta name="twitter:description" content="Murmur: the design language behind Dhairya Bhatia&#x27;s project pages. Principles, tokens, motion, sound, controls, components, themes and a live conformance audit.">
+<meta name="twitter:image" content="https://dhairyab0069.github.io/design-language/assets/og-image.png">
+<script>
+/* Shared theme protocol (all dhairyab0069.github.io pages): localStorage "theme" = light | dark | auto (absent = auto).
+   Runs before the stylesheets so there is no flash of the wrong theme. */
+(function () {
+  var d = document.documentElement, m = 'auto';
+  try { var s = localStorage.getItem('theme'); if (s === 'light' || s === 'dark' || s === 'auto') m = s; } catch (e) {}
+  var dark = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches, t = m === 'auto' ? (dark ? 'dark' : 'light') : m;
+  d.setAttribute('data-theme-mode', m); d.setAttribute('data-theme', t); d.style.colorScheme = t;
+})();
+</script>
+
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/components.css">
+<link rel="stylesheet" href="assets/controls.css">
+<link rel="stylesheet" href="tokens/tokens.css">
+<link rel="stylesheet" href="assets/guide.css">
+<script>
+/* Before first paint: mark JS available and open the motion gate unless the system or a saved choice says no. Storage may be blocked. */
+(function () {
+  var h = document.documentElement, m = null;
+  h.classList.replace('no-js', 'js');
+  try { m = localStorage.getItem('designlangua1-motion'); } catch (e) {}
+  var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var on = !reduced && m !== 'off';
+  h.setAttribute('data-motion', on ? 'on' : 'off'); if (on) h.classList.add('fx');
+})();
+</script>
+</head>
+<body class="dw-lantern">
+<a class="skip" href="#main">Skip to the page</a>
+<div class="dw-progress" aria-hidden="true"></div>
+<canvas class="dw-field" aria-hidden="true"></canvas>
+
+<header class="dw-header">
+  <div class="wrap">
+    <a class="dw-brand" href="#top">Murmur</a>
+    <nav class="dw-nav" id="dw-nav" aria-label="Sections"><a href="#principles">Principles</a><a href="#foundations">Foundations</a><a href="#theme">Light and dark</a><a href="#motion">Motion</a><a href="#sound">Sound</a><a href="#controls">Controls</a><a href="#components">Components</a><a href="#themes">Themes</a><a href="#engineering">Engineering</a><a href="#conformance">Audit</a><a href="#apply">Apply</a></nav>
+<!-- Symbol controls: paste inside the header. Static markup so they exist without JS; controls.js binds them. DEFAULT STATE IS ON. -->
+<div class="dw-controls" role="group" aria-label="Theme, sound, motion, effects and quiet">
+  <div class="dw-theme-switch" role="radiogroup" aria-label="Color theme">
+    <button type="button" role="radio" aria-checked="false" tabindex="-1" data-theme-mode="light" data-snd="none" aria-label="Light theme" title="Light theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg></button>
+    <button type="button" role="radio" aria-checked="false" tabindex="-1" data-theme-mode="dark" data-snd="none" aria-label="Dark theme" title="Dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></button>
+    <button type="button" role="radio" aria-checked="false" tabindex="0" data-theme-mode="auto" data-snd="none" aria-label="Match system theme" title="Auto (match system)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg></button>
+  </div>
+  <button class="dw-ico" type="button" id="dw-sound" data-snd="none" aria-pressed="true" aria-label="Sound on" title="Sound on. Press to turn off.">
+    <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><g class="on-only"><path d="M15.5 9a4 4 0 0 1 0 6"/><path d="M18 6.5a8 8 0 0 1 0 11"/></g><path class="off-only" d="M4 20 20 4"/></svg>
+  </button>
+  <button class="dw-ico" type="button" id="dw-motion" data-snd="none" aria-pressed="true" aria-label="Motion on" title="Motion on. Press to turn off.">
+    <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path class="on-only" d="M2.5 9c2-2.6 3.5-2.6 5.5 0s3.5 2.6 5.5 0 3.5-2.6 5.5 0M2.5 15c2-2.6 3.5-2.6 5.5 0s3.5 2.6 5.5 0 3.5-2.6 5.5 0"/><g class="off-only"><path d="M8.5 6.5v11M15.5 6.5v11"/></g></svg>
+  </button>
+  <button class="dw-ico" type="button" id="dw-fx" data-snd="none" aria-pressed="true" aria-label="Effects on" title="Effects on (ambient particles, light that follows the pointer, parallax). Press to turn off.">
+    <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3.500l1.800 5.100L18 10.400l-5.200 1.800L11 17.300l-1.800-5.100L4 10.400l5.200-1.800z"/><g class="on-only"><path d="M18.500 15.500v4M16.500 17.500h4"/><path d="M19 3.500v2.500M17.750 4.750h2.500"/></g><path class="off-only" d="M4 20 20 4"/></svg>
+  </button>
+  <button class="dw-ico" type="button" id="dw-quiet" data-snd="none" aria-pressed="false" aria-label="Quiet everything" title="Quiet everything: sound, motion and effects off. Press again to bring them back.">
+    <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.500"/><path d="M8 12h8"/></svg>
+  </button>
+</div>
+<div id="dw-live" class="sr-only" role="status" aria-live="polite"></div>
+
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<section class="dw-hero wrap" id="top">
+  <p class="eyebrow">Design language, version 1.0</p>
+  <h1 data-depth="0.04">Murmur</h1>
+  <p class="lede" data-reveal>The one quiet, living style behind every page on this site: alive by default, hushed in one press, honest and plain. Everything below is read from the pages themselves, and most of it you can hear and touch.</p>
+  <div class="dw-actions" data-reveal>
+    <a class="dw-btn" href="#principles" data-magnet>Read the principles</a>
+    <a class="dw-btn ghost" href="#themes">Try the twelve themes</a>
+    <a class="dw-btn ghost" href="#conformance">See the audit</a>
+  </div>
+  <ul class="facts" data-reveal>
+    <li><strong>12</strong> themes, each designed in light and dark</li>
+    <li><strong>10</strong> named sound cues in 6 palettes</li>
+    <li><strong>8</strong> transitions, one metaphor per page</li>
+    <li><strong>1</strong> shared <code>theme</code> setting for every page</li>
+  </ul>
+  <p class="muted small" data-reveal>Try it now: the header has Light, Dark and Auto, then Sound, Motion, Effects and the moon that quiets everything. Sound starts after your first click or key press, because browsers require it.</p>
+</section>
+
+<section class="section" id="principles"><div class="wrap">
+  <p class="eyebrow">1 Principles</p><h2>What every page shares</h2>
+  <div class="prose principles">{{md:principles}}</div>
+</div></section>
+
+<section class="section" id="foundations"><div class="wrap">
+  <p class="eyebrow">2 Foundations</p><h2>Design tokens</h2>
+  <p class="muted">Every value here is read from the kit and the theme registry. The swatches below are live: they use this page's own tokens, so they change when you pick Light or Dark.</p>
+  <div class="prose">{{md:colour-roles}}</div>
+  <!--demo-->
+  <div class="demo" aria-label="Live colour roles of this page">
+    <h4>This page's roles, live</h4>
+    <ul class="swatches" id="swatches" aria-label="Colour roles"></ul>
+    <p class="muted small">Each chip reads its role with <code>getComputedStyle</code>; switch Light or Dark in the header.</p>
+  </div>
+  <!--/demo-->
+  <div class="prose">{{md:type}}</div>
+  <!--demo-->
+  <div class="demo type-spec" aria-label="Type scale">
+    <p style="font:var(--weight-display) var(--step-4)/1.05 var(--font-display)">Step 4, hero</p>
+    <p style="font:var(--weight-display) var(--step-3)/1.1 var(--font-display)">Step 3, section title</p>
+    <p style="font:var(--weight-display) var(--step-2)/1.1 var(--font-display)">Step 2, subsection</p>
+    <p style="font:var(--weight-display) var(--step-1)/1.2 var(--font-display)">Step 1, card title</p>
+    <p style="font:400 var(--step-0)/1.6 var(--font-body)">Step 0, body text in the system font.</p>
+    <p style="font:400 var(--step--1)/1.4 var(--font-body)" class="muted">Step minus 1, captions and labels.</p>
+    <p style="font:var(--step--1) var(--font-mono)">Mono: --dur-base: 280ms;</p>
+  </div>
+  <!--/demo-->
+  <div class="prose">{{md:space}}</div>
+  <!--demo-->
+  <div class="demo" aria-label="Spacing, radii, elevation">
+    <h4>Spacing</h4>
+    <ul class="space-spec">
+      <li><span style="width:var(--space-1)"></span><code>--space-1</code></li><li><span style="width:var(--space-2)"></span><code>--space-2</code></li>
+      <li><span style="width:var(--space-3)"></span><code>--space-3</code></li><li><span style="width:var(--space-4)"></span><code>--space-4</code></li>
+      <li><span style="width:var(--space-5)"></span><code>--space-5</code></li><li><span style="width:var(--space-6)"></span><code>--space-6</code></li>
+      <li><span style="width:var(--space-7)"></span><code>--space-7</code></li><li><span style="width:var(--space-8)"></span><code>--space-8</code></li>
+    </ul>
+    <h4>Radii and elevation</h4>
+    <div class="shape-spec">
+      <div style="border-radius:var(--radius-s)">radius-s</div><div style="border-radius:var(--radius-m)">radius-m</div><div style="border-radius:var(--radius-l)">radius-l</div><div style="border-radius:var(--radius-pill)">pill</div>
+      <div style="box-shadow:var(--shadow-1)">shadow-1</div><div style="box-shadow:var(--shadow-2)">shadow-2</div><div style="box-shadow:var(--shadow-3)">shadow-3</div>
+    </div>
+  </div>
+  <!--/demo-->
+  <div class="prose">{{md:breakpoints}}</div>
+  <div class="prose">{{md:icons}}</div>
+  <!--demo-->
+  <div class="demo" aria-label="Icon rules">
+    <div class="icon-grid">
+      <figure><svg viewBox="0 0 24 24" class="grid24" aria-hidden="true" focusable="false"><path class="gl" d="M0 12h24M12 0v24M4 0v24M20 0v24M0 4h24M0 20h24"/><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg><figcaption>24px grid, 1.8 stroke</figcaption></figure>
+      <figure><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg><figcaption>sound on</figcaption></figure>
+      <figure><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M4 20 20 4"/></svg><figcaption>sound off</figcaption></figure>
+      <figure><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.5 9c2-2.6 3.5-2.6 5.5 0s3.5 2.6 5.5 0 3.5-2.6 5.5 0M2.5 15c2-2.6 3.5-2.6 5.5 0s3.5 2.6 5.5 0 3.5-2.6 5.5 0"/></svg><figcaption>motion on</figcaption></figure>
+      <figure><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11 3.5l1.8 5.1L18 10.4l-5.2 1.8L11 17.3l-1.8-5.1L4 10.4l5.2-1.8z"/><path d="M18.5 15.5v4M16.5 17.5h4M19 3.5v2.5M17.75 4.75h2.5"/></svg><figcaption>effects on</figcaption></figure>
+      <figure><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M8 12h8"/></svg><figcaption>quiet: circle with bar</figcaption></figure>
+      <figure><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z"/></svg><figcaption>moon: Dark only</figcaption></figure>
+      <figure><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><figcaption>half circle: auto</figcaption></figure>
+    </div>
+  </div>
+  <!--/demo-->
+</div></section>
+
+<section class="section" id="theme"><div class="wrap">
+  <p class="eyebrow">3 Light, dark and auto</p><h2>One setting for every page</h2>
+  <div class="prose">{{md:theme-key}}</div>
+  <!--demo-->
+  <div class="demo" id="theme-lab" aria-label="Live theme state">
+    <h4>Live state of this page</h4>
+    <dl class="readout" id="theme-readout"><dt>localStorage <code>theme</code></dt><dd data-r="key">read when the script runs</dd><dt><code>data-theme-mode</code> (the choice)</dt><dd data-r="mode">auto</dd><dt><code>data-theme</code> (what shows)</dt><dd data-r="theme">light</dd><dt>System prefers</dt><dd data-r="sys">light</dd><dt><code>themechange</code> events heard</dt><dd data-r="events">0</dd></dl>
+    <div class="theme-big" role="radiogroup" aria-label="Color theme, large copy of the header selector" id="theme-big">
+      <button type="button" role="radio" aria-checked="false" tabindex="-1" data-m="light" data-snd="none">Light</button>
+      <button type="button" role="radio" aria-checked="false" tabindex="-1" data-m="dark" data-snd="none">Dark</button>
+      <button type="button" role="radio" aria-checked="false" tabindex="0" data-m="auto" data-snd="none">Auto</button>
+    </div>
+    <p class="muted small">This large selector and the header one write the same key. Open this page in a second tab, change it in one, and the other follows without a reload.</p>
+  </div>
+  <!--/demo-->
+  <div class="prose">{{md:theme-selector}}</div>
+  <div class="prose">{{md:theme-behaviour}}</div>
+  <div class="prose">{{md:theme-design}}</div>
+</div></section>
+
+<section class="section" id="motion"><div class="wrap">
+  <p class="eyebrow">4 Motion</p><h2>The motion language</h2>
+  <div class="prose">{{md:motion}}{{md:motion-scale}}</div>
+  <!--demo-->
+  <div class="demo" data-demo="race" aria-label="Duration and easing demo">
+    <h4>Durations and easings, live</h4>
+    <div class="row">
+      <label for="ease-pick">Easing</label>
+      <select id="ease-pick" data-snd="none"><option value="--ease-standard">standard</option><option value="--ease-out">out</option><option value="--ease-in">in</option><option value="--ease-spring">spring</option><option value="linear">linear (not used)</option></select>
+      <button type="button" class="dw-btn" id="race-go">Play</button>
+    </div>
+    <ul class="race" id="race"></ul>
+    <p class="muted small" id="race-note">With Motion off or reduced, every duration collapses to 1 ms: the lanes jump to the end.</p>
+  </div>
+  <!--/demo-->
+  <div class="prose">{{md:choreography}}</div>
+  <!--demo-->
+  <div class="demo" aria-label="Staggered entrance demo">
+    <h4>Entrance and stagger</h4>
+    <div class="row"><button type="button" class="dw-btn ghost" id="stagger-go">Replay entrance</button></div>
+    <div class="stagger" id="stagger"><span data-reveal>1</span><span data-reveal>2</span><span data-reveal>3</span><span data-reveal>4</span><span data-reveal>5</span><span data-reveal>6</span></div>
+  </div>
+  <!--/demo-->
+  <div class="prose">{{md:transitions}}</div>
+  <!--demo-->
+  <div class="demo" aria-label="Transition catalogue demo">
+    <h4>Transitions, in a stage</h4>
+    <div class="row" id="tx-buttons" role="group" aria-label="Choose a transition"></div>
+    <div class="stage" id="tx-stage" aria-label="Transition stage"><div class="scene" id="tx-scene" data-n="0"><b>Scene A</b><span>Press a transition to move to the next scene.</span></div></div>
+    <p class="muted small" id="tx-note">These run the kit's own keyframes inside this box. A real page covers the whole screen. Use the nav links above to see the iris on the full page.</p>
+  </div>
+  <div class="demo" aria-label="Shared element and camera demo">
+    <h4>Shared element and camera</h4>
+    <div class="flip" id="flip"><button type="button" class="flip-tile" data-i="0">Tile one</button><button type="button" class="flip-tile" data-i="1">Tile two</button><button type="button" class="flip-tile" data-i="2">Tile three</button></div>
+    <p class="muted small">A tile grows into its detail with a shared-element move (measure, change, animate from the old rectangle). The camera move is in the town below, in Components.</p>
+  </div>
+  <!--/demo-->
+  <div class="prose">{{md:ambient}}</div>
+  <!--demo-->
+  <div class="demo" aria-label="Ambient motion demo">
+    <h4>Ambient fields (move the pointer over them)</h4>
+    <div class="fields" id="fields"></div>
+    <div class="parallax" id="parallax" aria-label="Parallax layers follow the pointer"><i class="l1"></i><i class="l2"></i><i class="l3"></i><span>Parallax: three layers follow the pointer by different amounts</span></div>
+  </div>
+  <!--/demo-->
+  <div class="prose">{{md:performance}}{{md:reduced}}</div>
+</div></section>
+
+<section class="section" id="sound"><div class="wrap">
+  <p class="eyebrow">5 Sound</p><h2>The sound language</h2>
+  <div class="prose">{{md:sound-rules}}{{md:cues}}</div>
+  <!--demo-->
+  <div class="demo" data-demo="sound" aria-label="Playable cues">
+    <h4>Play every cue, in every palette</h4>
+    <p class="muted small" id="snd-status" role="status">Sound is on. Press a cue. (Browsers start audio after your first press.)</p>
+    <div class="palettes" id="palettes"></div>
+    <div class="row"><button type="button" class="dw-btn" id="play-all" data-snd="none">Play all ten cues in order</button><button type="button" class="dw-btn ghost" id="compare" data-snd="none">Hear click in all six palettes</button></div>
+  </div>
+  <!--/demo-->
+  <div class="prose">{{md:palettes}}</div>
+</div></section>
+
+<section class="section" id="controls"><div class="wrap">
+  <p class="eyebrow">6 Controls</p><h2>Symbol controls</h2>
+  <div class="prose">{{md:controls}}</div>
+  <!--demo-->
+  <div class="demo" aria-label="Control states">
+    <h4>States of the real controls (read live from the header)</h4>
+    <dl class="readout" id="ctl-readout"><dt>Sound</dt><dd data-c="dw-sound"></dd><dt>Motion</dt><dd data-c="dw-motion"></dd><dt>Effects</dt><dd data-c="dw-fx"></dd><dt>Quiet everything</dt><dd data-c="dw-quiet"></dd></dl>
+    <h4>All eight states, as drawn</h4>
+    <div class="ctl-specimens" id="ctl-spec"></div>
+    <p class="muted small">The specimens are inert copies. Use the header buttons for the real thing, and try the moon.</p>
+  </div>
+  <!--/demo-->
+</div></section>
+
+<section class="section" id="components"><div class="wrap">
+  <p class="eyebrow">7 Components</p><h2>Components and patterns</h2>
+  <div class="prose">{{md:components}}</div>
+  <!--demo-->
+  <div class="gallery">
+    <div class="demo"><h4>Header and nav</h4>
+      <div class="mini-header"><b>Brand</b><nav aria-label="Sample navigation"><a href="#components" aria-current="true">Now</a><a href="#components">Next</a><a href="#components">Later</a></nav><span class="mini-ico" aria-hidden="true"></span></div></div>
+    <div class="demo"><h4>Hero</h4>
+      <div class="mini-hero"><p class="eyebrow">Eyebrow</p><p class="mh1">One plain headline</p><p class="muted">One lede, in plain words.</p><span class="dw-btn" aria-hidden="true">Primary</span> <span class="dw-btn ghost" aria-hidden="true">Ghost</span></div></div>
+    <div class="demo"><h4>Cards with section reveal</h4>
+      <div class="row"><button type="button" class="dw-btn ghost" id="cards-replay">Replay reveal</button></div>
+      <div class="dw-grid" id="cards-demo"><article class="dw-card" data-reveal><span class="tag">Tag</span><h3>Card one</h3><p>Two plain sentences. Lifts on hover.</p></article><article class="dw-card" data-reveal><span class="tag">Tag</span><h3>Card two</h3><p>Staggered by sibling index.</p></article><article class="dw-card" data-reveal><span class="tag">Tag</span><h3>Card three</h3><p>Always visible without motion.</p></article></div></div>
+    <div class="demo"><h4>Timeline</h4>
+      <ol class="dw-timeline"><li><time>Step 1</time><h3>Read</h3><p>The registry first.</p></li><li><time>Step 2</time><h3>Scaffold</h3><p>One command.</p></li><li><time>Step 3</time><h3>Look</h3><p>Screenshots, light and dark.</p></li></ol></div>
+    <div class="demo"><h4>Chart with a table behind it</h4><div id="chart-host"></div></div>
+    <div class="demo"><h4>Tabs, modal and toast</h4>
+      <div class="dw-tabs" id="tabs-demo"><div role="tablist" aria-label="Sample tabs"><button role="tab" id="tab-a" aria-controls="panel-a" aria-selected="true" type="button">Overview</button><button role="tab" id="tab-b" aria-controls="panel-b" aria-selected="false" type="button">Design</button><button role="tab" id="tab-c" aria-controls="panel-c" aria-selected="false" type="button">Notes</button></div>
+        <div role="tabpanel" id="panel-a" aria-labelledby="tab-a" tabindex="0"><p>Arrow keys move between tabs; Home and End jump.</p></div><div role="tabpanel" id="panel-b" aria-labelledby="tab-b" tabindex="0"><p>Tabs use a roving tabindex.</p></div><div role="tabpanel" id="panel-c" aria-labelledby="tab-c" tabindex="0"><p>Panels are focusable for keyboard readers.</p></div></div>
+      <div class="row"><button class="dw-btn ghost" type="button" data-modal="dw-modal">Open a panel</button><button class="dw-btn ghost" type="button" id="toast-go" data-snd="none">Show a toast</button><button class="dw-btn ghost" type="button" id="error-go" data-snd="none">Show an error toast</button></div></div>
+    <div class="demo"><h4>Filters and search</h4>
+      <div class="row"><label for="q">Search themes</label><input id="q" type="search" placeholder="try: dark, metal, paper" autocomplete="off" data-snd="none"><span id="q-count" class="muted small" role="status"></span></div>
+      <div class="row chips" id="chips" role="group" aria-label="Filter by sound palette"></div><ul class="filter-list" id="filter-list"></ul></div>
+    <div class="demo"><h4>Diorama and its text version</h4>
+      <div class="row"><button class="dw-btn ghost" type="button" id="town-still" aria-pressed="false">Still: off</button><span class="muted small">Walk with the arrow keys when the town has focus. The camera eases toward the walker.</span></div>
+      <div class="town" id="town" tabindex="0" role="img" aria-label="A small illustrative town: a walker moves along one road past three buildings; a text list follows"><svg viewBox="0 0 640 180" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><g id="town-world"><rect x="0" y="130" width="1280" height="50" class="road"/><g class="b b1"><rect x="40" y="70" width="90" height="60"/><path d="M34 70l51-34 51 34z"/></g><g class="b b2"><rect x="250" y="50" width="80" height="80"/><rect x="270" y="90" width="20" height="40" class="door"/></g><g class="b b3"><rect x="470" y="80" width="110" height="50"/><path d="M470 80h110l-14-24h-82z"/></g><g class="b b1"><rect x="700" y="60" width="90" height="70"/><path d="M694 60l51-30 51 30z"/></g><g class="b b2"><rect x="900" y="40" width="70" height="90"/></g><g class="b b3"><rect x="1060" y="70" width="120" height="60"/></g><circle id="walker" cx="60" cy="122" r="7" class="walker"/></g></svg></div>
+      <details class="text-version"><summary>Text version of the town</summary><ol><li>Cottage, at the start of the road.</li><li>Tower, a third of the way along.</li><li>Market hall, half way.</li><li>Second cottage, two thirds along.</li><li>Lookout, near the end.</li><li>Long hall, at the end of the road.</li></ol><p>Illustrative drawing: it is not a map of any project.</p></details></div>
+    <div class="demo"><h4>Project-page anatomy</h4>
+      <ol class="anatomy"><li><b>Header</b> brand, section nav, theme selector, four symbol controls</li><li><b>Hero</b> one h1, one lede, one primary action</li><li><b>What it is</b> three or four cards</li><li><b>The playable part</b> the demo or the live visual</li><li><b>How it works</b> timeline or tabs</li><li><b>Results or numbers</b> a chart with its table</li><li><b>Limits</b> honest, plain</li><li><b>Links</b> source, downloads, text version</li><li><b>Footer</b> privacy note, README, DESIGN</li></ol></div>
+  </div>
+  <!--/demo-->
+</div></section>
+
+<section class="section" id="themes"><div class="wrap">
+  <p class="eyebrow">8 Themes</p><h2>The twelve themes, in both modes</h2>
+  <div class="prose">{{md:themes}}</div>
+  <!--demo-->
+  <div class="demo" id="theme-gallery" aria-label="Theme gallery">
+    <div class="row"><span id="tg-label" class="label">Theme</span><div class="chips" id="tg-themes" role="radiogroup" aria-labelledby="tg-label"></div></div>
+    <div class="row"><span id="tg-mode-label" class="label">Show</span><div class="chips" id="tg-mode" role="radiogroup" aria-labelledby="tg-mode-label">
+      <button type="button" role="radio" aria-checked="true" data-mode="page" data-snd="none">Follow the page</button><button type="button" role="radio" aria-checked="false" data-mode="light" data-snd="none">Light</button><button type="button" role="radio" aria-checked="false" data-mode="dark" data-snd="none">Dark</button></div>
+      <span class="muted small">The Light, Dark and Auto selector in the header changes this too when you follow the page.</span></div>
+    <div class="tg-grid">
+      <div class="sample" id="tg-sample" data-dl-theme="workshop">
+        <div class="s-bar"><b id="s-title">Workshop</b><span class="s-links"><a href="#themes">Link</a><a href="#themes">Link</a></span></div>
+        <h3 id="s-h">A sample section</h3>
+        <p>Body text in this theme's body font, with <a href="#themes">a link</a> and <code>code</code>. Cards, buttons and status read the same roles everywhere.</p>
+        <div class="s-row"><span class="s-btn">Primary</span><span class="s-btn ghost">Ghost</span><span class="s-chip ok">ok</span><span class="s-chip warn">warn</span><span class="s-chip bad">danger</span></div>
+        <div class="s-card"><b>A card</b><span>Surface, line, radius and shadow come from tokens.</span></div>
+      </div>
+      <div class="tg-info" id="tg-info" aria-live="polite"></div>
+    </div>
+    <h4>Light and dark sets of this theme</h4>
+    <div class="pair" id="tg-pair"></div>
+    <div class="row"><button type="button" class="dw-btn ghost" id="tg-cue" data-snd="none">Hear its click, open and success</button><button type="button" class="dw-btn ghost" id="tg-tx" data-snd="none">Preview its transition</button></div>
+    <div class="stage small" id="tg-stage" aria-label="Transition preview"><div class="scene" id="tg-scene"><b>Scene</b><span>Theme transition preview</span></div></div>
+  </div>
+  <!--/demo-->
+  <div class="prose">{{md:theme-choice}}</div>
+  <div class="prose">{{md:theme-new}}</div>
+  <h3>Every theme's tokens, both modes</h3>
+  <p class="muted">Open a theme for its full light and dark values. The same data is in <a href="tokens/tokens.json">tokens/tokens.json</a> and <a href="tokens/tokens.css">tokens/tokens.css</a>.</p>
+  <div class="prose">{{md:appendix}}</div>
+</div></section>
+
+<section class="section" id="engineering"><div class="wrap">
+  <p class="eyebrow">9 Engineering</p><h2>Engineering conventions</h2>
+  <div class="prose">{{md:engineering}}</div>
+</div></section>
+
+<section class="section" id="conformance"><div class="wrap">
+  <p class="eyebrow">10 Audit</p><h2>Do the pages conform?</h2>
+  <div class="prose">{{md:conformance}}</div>
+</div></section>
+
+<section class="section" id="apply"><div class="wrap">
+  <p class="eyebrow">11 Apply</p><h2>Use it on a new project</h2>
+  <div class="prose">{{md:apply}}</div>
+  <h3>Changelog</h3>
+  <div class="prose">{{md:changelog}}</div>
+  <h3>Decisions and trade-offs</h3>
+  <div class="prose">{{md:decisions}}</div>
+</div></section>
+
+</main>
+<noscript><div class="wrap section"><p><strong>The live demos need JavaScript.</strong> Everything else on this page is plain text and tables and is readable as it is. A cleaner reading copy is the <a href="text.html">text version</a>, and the canonical document is <a href="DESIGN-LANGUAGE.md">DESIGN-LANGUAGE.md</a>.</p></div></noscript>
+
+<dialog class="dw-modal" id="dw-modal" aria-labelledby="dw-modal-t"><h3 id="dw-modal-t">A panel</h3><p>Modal panels use the native dialog element: focus is trapped and Escape closes it.</p><button class="dw-btn" type="button" data-close>Close</button></dialog>
+
+<footer class="dw-footer"><div class="wrap">
+  <p>Murmur 1.0.0. Static page: no trackers, no web fonts, no external requests. The sound is synthesized in your browser.</p>
+  <p><a href="text.html">Text version</a> <a href="DESIGN-LANGUAGE.md">DESIGN-LANGUAGE.md</a> <a href="tokens/tokens.json">tokens.json</a> <a href="tokens/tokens.css">tokens.css</a> <a href="docs/conformance.json">conformance.json</a> <a href="https://github.com/dhairyab0069/design-language">Source</a></p>
+</div></footer>
+
+<script src="assets/site.config.js"></script>
+<script src="assets/dl-data.js"></script>
+<script src="assets/motion.js"></script>
+<script src="assets/sound.js"></script>
+<script src="assets/transitions.js"></script>
+<script src="assets/controls.js"></script>
+<script src="assets/components.js"></script>
+<script src="assets/theme.js"></script>
+<script src="assets/guide.js"></script>
+<script src="assets/demo-motion.js"></script>
+<script src="assets/demo-sound.js"></script>
+<script src="assets/demo-themes.js"></script>
+<script src="assets/demo-components.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
